@@ -22,6 +22,9 @@ type User struct {
 	Email        string             `bson:"email,omitempty" json:"email,omitempty"`
 	Password     string             `json:"password" bson:"password"`
 	PasswordHash string             `json:"passwordhash" bson:"passwordhash"`
+	Token        string             `json:"token,omitempty" bson:"token,omitempty"`
+	Private      string             `json:"private,omitempty" bson:"private,omitempty"`
+	Public       string             `json:"public,omitempty" bson:"public,omitempty"`
 }
 
 type Credential struct {

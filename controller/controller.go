@@ -43,9 +43,9 @@ func Login(PASETOPRIVATEKEYENV, MONGOCONNSTRINGENV, dbname, collectionname strin
 	if err != nil {
 		Response.Message = "error parsing application/json: " + err.Error()
 	} else {
-		if IsPasswordValidEmail(mconn, collectionname, datauser) {
+		if IsPasswordValid(mconn, collectionname, datauser) {
 			Response.Status = true
-			tokenstring, err := watoken.Encode(datauser.Email, os.Getenv(PASETOPRIVATEKEYENV))
+			tokenstring, err := watoken.Encode(datauser.Username, os.Getenv(PASETOPRIVATEKEYENV))
 			if err != nil {
 				Response.Message = "Gagal Encode Token : " + err.Error()
 			} else {
@@ -53,7 +53,7 @@ func Login(PASETOPRIVATEKEYENV, MONGOCONNSTRINGENV, dbname, collectionname strin
 				Response.Token = tokenstring
 			}
 		} else {
-			Response.Message = "Email atau Password Salah"
+			Response.Message = "Username atau Password Salah"
 		}
 	}
 
@@ -82,9 +82,10 @@ func CheckPasswordHash(passwordhash, hash string) bool {
 	return err == nil
 }
 
-func IsPasswordValidEmail(mongoconn *mongo.Database, collection string, userdata model.User) bool {
+func IsPasswordValid(mongoconn *mongo.Database, collection string, userdata model.User) bool {
 	filter := bson.M{
 		"$or": []bson.M{
+			{"username": userdata.Username},
 			{"email": userdata.Email},
 		},
 	}

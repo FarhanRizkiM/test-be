@@ -2,7 +2,7 @@ package testbe
 
 import (
 	"github.com/GoogleCloudPlatform/functions-framework-go/functions"
-	"github.com/FarhanRizkiM/backend-ai/url"
+	"github.com/FarhanRizkiM/test-be/url"
 )
 
 func init() {

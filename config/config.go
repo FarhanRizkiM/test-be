@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/FarhanRizkiM/backend-ai/helper"
+	"github.com/FarhanRizkiM/test-be/helper"
 	"os"
 )
 
